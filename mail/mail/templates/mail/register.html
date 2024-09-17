@@ -1,0 +1,106 @@
+{% extends "mail/layout.html" %}
+
+{% block body %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center;    /* Center vertically */
+        height: 70vh;
+        margin: 0;             /* Remove default margin */
+        padding: 0;            /* Remove default padding */
+    }
+
+    h2 {
+        color: #333;
+        margin-top: 0;
+        text-align: relative;    /* Center text */
+    }
+
+    form {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px /* Ensure padding doesn't affect width */
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .message {
+        color: #d9534f;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .redirect {
+        text-align: relative;    /* Center text */
+        margin-top: 15px;
+    }
+</style>
+
+<h2>Register</h2>
+
+{% if message %}
+    <div class="message">{{ message }}</div>
+{% endif %}
+
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <input class="form-control" type="email" name="email" placeholder="Email Address" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Register">
+</form>
+
+<div class="redirect">
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+</div>
+
+{% endblock %}
